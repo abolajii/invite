@@ -1,5 +1,4 @@
 import Button from "../button/index";
-import React from "react";
 import { clsx } from "clsx";
 import image1 from "./front.jpeg";
 import image2 from "./one.jpeg";
@@ -32,10 +31,18 @@ const Container = styled.div`
 
 const Inner = styled.div`
   position: relative;
-  width: 400px;
-
+  width: 100%;
   height: 400px;
   transition: transform 0.5s;
+`;
+
+const Width = styled.div`
+  width: 95%;
+  margin: auto;
+
+  @media (min-width: 768px) {
+    width: 400px;
+  }
 `;
 
 const ButtonContainer = styled.div`
@@ -43,7 +50,8 @@ const ButtonContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   /* width: 100%; */
-  width: 400px;
+  width: 100%;
+
   margin-top: 20px;
 `;
 
@@ -152,7 +160,7 @@ const Cards = () => {
           useBookStore.setState({ paper3Flipped: false });
           break;
         case 5:
-          useBookStore.setState({ paper5Flipped: false });
+          useBookStore.setState({ paper4Flipped: false });
           break;
         case 6:
           useBookStore.setState({ paper5Flipped: false });
@@ -166,43 +174,42 @@ const Cards = () => {
     }
   };
 
-  React.useEffect(() => {
-    console.log(useBookStore.getState());
-  }, []);
-
   return (
     <Container>
-      <Inner>
-        <Paper zIndex={5}>
-          <Front className={clsx("bg-1", paper1Flipped && "flipped")}>
-            <img src={image1}></img>
-          </Front>
-        </Paper>
-        <Paper zIndex={4}>
-          <Front className={clsx("bg-2", paper2Flipped && "flipped")}>
-            <img src={image2}></img>
-          </Front>
-        </Paper>
-        <Paper zIndex={3}>
-          <Front className={clsx("bg-3", paper3Flipped && "flipped")}>
-            <img src={image3}></img>
-          </Front>
-        </Paper>
-        <Paper zIndex={2}>
-          <Front className={clsx("bg-4", paper4Flipped && "flipped")}>
-            <img src={image4}></img>
-          </Front>
-        </Paper>
-        <Paper zIndex={1}>
-          <Front className={clsx("bg-5", paper5Flipped && "flipped")}>
-            <img src={image5}></img>
-          </Front>
-        </Paper>
-      </Inner>
-      <ButtonContainer>
-        <Button onClick={goPrevPage}>{"<"}</Button>
-        <Button onClick={goNextPage}>{">"}</Button>
-      </ButtonContainer>
+      <Width>
+        <Inner>
+          <Paper zIndex={5}>
+            <Front className={clsx("bg-1", paper1Flipped && "flipped")}>
+              <img src={image1}></img>
+            </Front>
+          </Paper>
+          <Paper zIndex={4}>
+            <Front className={clsx("bg-2", paper2Flipped && "flipped")}>
+              <img src={image2}></img>
+            </Front>
+          </Paper>
+          <Paper zIndex={3}>
+            <Front className={clsx("bg-3", paper3Flipped && "flipped")}>
+              <img src={image3}></img>
+            </Front>
+          </Paper>
+          <Paper zIndex={2}>
+            <Front className={clsx("bg-4", paper4Flipped && "flipped")}>
+              <img src={image4}></img>
+            </Front>
+          </Paper>
+          <Paper zIndex={1}>
+            <Front className={clsx("bg-5", paper5Flipped && "flipped")}>
+              <img src={image5}></img>
+              {/* <p>5</p> */}
+            </Front>
+          </Paper>
+        </Inner>
+        <ButtonContainer>
+          <Button onClick={goPrevPage}>{"<"}</Button>
+          <Button onClick={goNextPage}>{">"}</Button>
+        </ButtonContainer>
+      </Width>
     </Container>
   );
 };
